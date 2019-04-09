@@ -1,0 +1,22 @@
+{
+  "name": "@zisaid/word",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zisaid/word.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/zisaid/word/issues"
+  },
+  "homepage": "https://github.com/zisaid/word#readme",
+  "dependencies": {
+    "@zisaid/request": "^1.0.0"
+  }
+}

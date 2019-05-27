@@ -13,15 +13,36 @@ let dict = {};
 
 let wordsDao = {};
 
-wordsDao.init = function (wordDb, dictpath, youdaoAppKdy, youdaoAppAuth, mongoServer, redisServer) {
+/**
+ * @api {npm} .init 初始化
+ * @apiDescription 初始化
+ * @apiGroup Word
+ * @apiParam {string} wordDb settings.db
+ * @apiParam {string} dictpath settings.dictPath
+ * @apiParam {string} youdaoAppKey 有道接口的appKey
+ * @apiParam {string} youdaoAppAuth 有道接口的appAuth
+ * @apiParam {object} mongoServer setting.mongo
+ * @apiParam {object} redisServer setting.redis
+ * @apiVersion 0.0.1
+ */
+wordsDao.init = function (wordDb, dictpath, youdaoAppKey, youdaoAppAuth, mongoServer, redisServer) {
   mongo = mongoServer;
   redis = redisServer;
   dbRes = wordDb;
   dictPath = dictpath;
-  appKey = youdaoAppKdy;
+  appKey = youdaoAppKey;
   appAuth = youdaoAppAuth;
 };
 
+/**
+ * @api {npm} .code2words 取教材单词列表
+ * @apiDescription 取教材单词列表
+ * @apiGroup Word
+ * @apiParam {number} code 教材或章节代码
+ * @apiSuccessExample {array} 示例
+ * 暂无
+ * @apiVersion 0.0.1
+ */
 wordsDao.code2words = function (code) {
   return new Promise((resolve, reject) => {
     mongo.read(dbRes, 'words', {c: code}, 1)
@@ -34,6 +55,15 @@ wordsDao.code2words = function (code) {
   });
 };
 
+/**
+ * @api {npm} .getWord 取所有单词
+ * @apiDescription 找到不同教材的相同单词
+ * @apiGroup Word
+ * @apiParam {string} word 要找的单词
+ * @apiSuccessExample {array} 示例
+ * 暂无
+ * @apiVersion 0.0.1
+ */
 wordsDao.getWord = function (word) {
   return new Promise(resolve => {
     redis.GET('mongoWords:' + word, -1)
@@ -64,6 +94,15 @@ wordsDao.getWord = function (word) {
   });
 };
 
+/**
+ * @api {npm} .getYoudao 取单词的有道数据
+ * @apiDescription 取单词的有道数据
+ * @apiGroup Word
+ * @apiParam {string} word 要找的单词
+ * @apiSuccessExample {object} 示例
+ * 暂无
+ * @apiVersion 0.0.1
+ */
 wordsDao.getYoudao = function (word) {
   return new Promise(resolve => {
     let query = word.replace(/[\/\\%]/g, ',');
@@ -110,6 +149,15 @@ wordsDao.getYoudao = function (word) {
   });
 };
 
+/**
+ * @api {npm} .getTts 取单词的有道TTS
+ * @apiDescription 取单词的有道TTS
+ * @apiGroup Word
+ * @apiParam {string} query 要找的单词
+ * @apiSuccessExample {mp3} 示例
+ * mp3数据流
+ * @apiVersion 0.0.1
+ */
 wordsDao.getTts = function (query) {
   query = query.replace(/[\/\\%]/g, ',');
   return new Promise((resolve, reject) => {
@@ -156,6 +204,16 @@ wordsDao.getTts = function (query) {
   });
 };
 
+/**
+ * @api {npm} .dict 自己的词典
+ * @apiDescription 如果外研版有给外研，否则其它版本，都没有给有道
+ * @apiGroup Word
+ * @apiParam {string} word 要找的单词
+ * @apiParam {bool} noChange 是否保持原样
+ * @apiSuccessExample {object} 示例
+ * 暂无
+ * @apiVersion 0.0.1
+ */
 wordsDao.dict = function (word, noChange) {
   return new Promise(resolve => {
     let srcWord = word;

@@ -35,12 +35,51 @@ wordsDao.init = function (wordDb, dictpath, youdaoAppKey, youdaoAppAuth, mongoSe
 };
 
 /**
- * @api {npm} .code2words 取教材单词列表
+ * @api {npm} .code2words 该教材的单词表
  * @apiDescription 取教材单词列表
  * @apiGroup Word
  * @apiParam {number} code 教材或章节代码
  * @apiSuccessExample {array} 示例
- * 暂无
+ * [
+ *   {
+ *     "_id": "5c94d832d51b8aef0483be6e",
+ *     "c": [
+ *       4649,
+ *       4726,
+ *       4730,
+ *       4731
+ *     ],
+ *     "w": "a",
+ *     "yb": "[ə]",
+ *     "cx": "art.",
+ *     "sy": "一（个）",
+ *     "audio": "/jh/a.mp3"
+ *   },
+ *   {
+ *     "_id": "5c22f718bcd4496b710ae989",
+ *     "c": [
+ *       4386,
+ *       4403,
+ *       4405
+ *     ],
+ *     "w": "a",
+ *     "cx": "article.",
+ *     "definition": "one; every or each; used when saying how much of something there is",
+ *     "example": "They left the party an hour ago; I need a new car; I run three times a week.",
+ *     "sy": "一（个）；每一（个），用于表示数量",
+ *     "yb": "[ə, eɪ]",
+ *     "audio": "/jh/a.mp3"
+ *   },
+ *   {
+ *     "_id": "5c1a57c0856d95b8809b65e6",
+ *     "c": [
+ *       1000000
+ *     ],
+ *     "w": "a",
+ *     "uk": "cappella ˌæ kæˈpelә",
+ *     "us": "ˌɑ kәˈpɛlә#ˌæ-"
+ *   }
+ * ]
  * @apiVersion 0.0.1
  */
 wordsDao.code2words = function (code) {
@@ -56,12 +95,51 @@ wordsDao.code2words = function (code) {
 };
 
 /**
- * @api {npm} .getWord 取所有单词
+ * @api {npm} .getWord 该单词所有数据
  * @apiDescription 找到不同教材的相同单词
  * @apiGroup Word
  * @apiParam {string} word 要找的单词
  * @apiSuccessExample {array} 示例
- * 暂无
+ * [
+ *   {
+ *     "_id": "5c94d832d51b8aef0483be6e",
+ *     "c": [
+ *       4649,
+ *       4726,
+ *       4730,
+ *       4731
+ *     ],
+ *     "w": "a",
+ *     "yb": "[ə]",
+ *     "cx": "art.",
+ *     "sy": "一（个）",
+ *     "audio": "/jh/a.mp3"
+ *   },
+ *   {
+ *     "_id": "5c22f718bcd4496b710ae989",
+ *     "c": [
+ *       4386,
+ *       4403,
+ *       4405
+ *     ],
+ *     "w": "a",
+ *     "cx": "article.",
+ *     "definition": "one; every or each; used when saying how much of something there is",
+ *     "example": "They left the party an hour ago; I need a new car; I run three times a week.",
+ *     "sy": "一（个）；每一（个），用于表示数量",
+ *     "yb": "[ə, eɪ]",
+ *     "audio": "/jh/a.mp3"
+ *   },
+ *   {
+ *     "_id": "5c1a57c0856d95b8809b65e6",
+ *     "c": [
+ *       1000000
+ *     ],
+ *     "w": "a",
+ *     "uk": "cappella ˌæ kæˈpelә",
+ *     "us": "ˌɑ kәˈpɛlә#ˌæ-"
+ *   }
+ * ]
  * @apiVersion 0.0.1
  */
 wordsDao.getWord = function (word) {
